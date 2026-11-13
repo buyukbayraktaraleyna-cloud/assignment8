@@ -19,6 +19,29 @@ const COURSES = [
   { id: 'CS402', title: 'Cloud Deployment and Security', credits: 5 }
 ];
 
+// Counter variable to track total incoming requests since server start
+let requestsServed = 0;
+
+// Middleware 1: Logs timestamp, HTTP method, and requested URL
+const requestLogger = (req, res, next) => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${req.method} ${req.url}`);
+  next(); // Pass control to the next middleware or route handler
+};
+
+// Middleware 2: Increments the request counter on every incoming request
+const requestCounter = (req, res, next) => {
+  requestsServed += 1;
+  next(); // Pass control forward
+};
+
+// Register middlewares before any routes or static file handlers
+app.use(requestLogger);
+app.use(requestCounter);
+
+// Serve static files from the public directory regardless of working directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Start the server and print the full local URL
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
