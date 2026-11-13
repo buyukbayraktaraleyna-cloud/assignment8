@@ -58,6 +58,43 @@ app.get('/old-page', (req, res) => {
   res.redirect('/hello');
 });
 
+// API Route: Returns the list of courses as a JSON array
+app.get('/api/courses', (req, res) => {
+  res.status(200).json(COURSES);
+});
+
+// API Route: Returns live Node.js process status and uptime
+app.get('/api/status', (req, res) => {
+  res.status(200).json({
+    status: 'operational',
+    nodeVersion: process.version,
+    uptimeSeconds: Math.floor(process.uptime())
+  });
+});
+
+// API Route: Echoes User-Agent and Accept request headers without mutating req
+app.get('/api/headers', (req, res) => {
+  res.status(200).json({
+    userAgent: req.get('User-Agent') || 'Unknown',
+    accept: req.get('Accept') || 'Unknown'
+  });
+});
+
+// API Route: Simulates subscription creation and returns 201 Created
+app.post('/api/subscribe', (req, res) => {
+  res.status(201).json({ subscribed: true });
+});
+
+// API Route: Simulates a restricted endpoint returning 403 Forbidden
+app.get('/api/admin', (req, res) => {
+  res.status(403).json({ error: 'Forbidden' });
+});
+
+// API Route: Exposes the total number of requests served
+app.get('/api/stats', (req, res) => {
+  res.status(200).json({ requestsServed });
+});
+
 // Start the server and print the full local URL
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
