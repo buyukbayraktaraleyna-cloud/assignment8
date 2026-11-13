@@ -42,6 +42,22 @@ app.use(requestCounter);
 // Serve static files from the public directory regardless of working directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Route: Plain text greeting containing student's name
+app.get('/hello', (req, res) => {
+  res.type('text/plain').send("Hello from Aleyna's server");
+});
+
+// Route: Plain text robots.txt file with explicit content-type
+app.get('/robots.txt', (req, res) => {
+  const robotsContent = 'User-agent: *\nDisallow: /api/admin\nAllow: /';
+  res.type('text/plain').send(robotsContent);
+});
+
+// Route: Redirects visitors from /old-page to /hello
+app.get('/old-page', (req, res) => {
+  res.redirect('/hello');
+});
+
 // Start the server and print the full local URL
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
