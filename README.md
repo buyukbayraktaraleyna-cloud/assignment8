@@ -3,5 +3,5 @@
 ## How to Install and Run
 1. Clone the repository and enter the project directory:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/buyukbayraktaraleyna-cloud/assignment8.git
    cd assignment8
