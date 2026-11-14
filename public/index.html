@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BSc in Modern Web & Cloud Systems</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>BSc in Modern Web & Cloud Systems</h1>
+      <p>
+        Welcome to the official information portal for our undergraduate Computer Engineering track.
+        This programme covers HTTP fundamentals, RESTful API design, server-side JavaScript, and cloud infrastructure.
+      </p>
+    </header>
+
+    <section class="tester-section">
+      <h2>Interactive API Explorer</h2>
+      <p>Click any endpoint below to send a live request to the Express 5 server:</p>
+
+      <div class="button-grid">
+        <button type="button" data-url="/api/courses" data-method="GET">GET /api/courses</button>
+        <button type="button" data-url="/api/status" data-method="GET">GET /api/status</button>
+        <button type="button" data-url="/api/headers" data-method="GET">GET /api/headers</button>
+        <button type="button" data-url="/api/subscribe" data-method="POST" class="btn-post">POST /api/subscribe</button>
+        <button type="button" data-url="/api/admin" data-method="GET" class="btn-warn">GET /api/admin</button>
+        <button type="button" data-url="/api/stats" data-method="GET">GET /api/stats</button>
+        <button type="button" data-url="/api/nonexistent" data-method="GET" class="btn-error">GET /api/nonexistent (404)</button>
+      </div>
+    </section>
+
+    <section class="output-section">
+      <div class="status-bar">
+        <span>HTTP Status:</span>
+        <strong id="status-display">Waiting for request...</strong>
+      </div>
+      <pre id="response-body">// Response body will appear here</pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
