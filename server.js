@@ -95,6 +95,15 @@ app.get('/api/stats', (req, res) => {
   res.status(200).json({ requestsServed });
 });
 
+// 404 Fallback Handler: Registered last so it never hides valid routes
+// Uses app.use() without wildcard '*' for Express 5 compatibility
+app.use((req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+  return res.status(404).type('text/plain').send('404 - Page not found');
+});
+
 // Start the server and print the full local URL
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
